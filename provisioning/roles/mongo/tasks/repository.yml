@@ -1,0 +1,5 @@
+- name: add mongo apt key from ubuntu keyserver
+  apt_key: keyserver={{ mongo.key_server }} id={{ mongo.key_id }}
+
+- name: add mongo apt repository
+  apt_repository: repo="{{ mongo.repo }}" state=present

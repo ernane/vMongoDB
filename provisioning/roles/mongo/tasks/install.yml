@@ -1,0 +1,11 @@
+- name: install mongodb
+  apt: name=mongodb-org update_cache=yes cache_valid_time=3600
+
+- name: install pymongo with pip
+  pip: name=pymongo
+
+- name: add mongo apt key from ubuntu keyserver
+  apt_key: keyserver={{ mongo.key_server }} id={{ mongo.key_id }}
+
+- name: add mongo apt repository
+  apt_repository: repo="{{ mongo.repo }}" state=present

@@ -1,0 +1,21 @@
+locale: en_US.UTF-8
+
+mongo:
+  repo: "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse"
+  key_server: hkp://keyserver.ubuntu.com:80
+  key_id: 0C49F3730359A14518585931BC711F9BA15703C6
+
+  database: bongo
+  user: bongo
+  password: bongo
+
+  admin_user: vagrant
+  admin_password: vagrant
+
+# be aware, when you're activating authorization, for example robomongo will stop working
+# due to the changes in mongodbs auth module
+  authorization: no
+
+  config:
+    port: 27017
+    listen: '0.0.0.0'

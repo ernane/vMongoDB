@@ -1,0 +1,15 @@
+- name: configure mongo main config
+  template: src=mongod.conf.j2 dest=/etc/mongod.conf owner=root group=root mode=0644
+  notify: restart mongodb service
+
+- name: Configure MongoDB
+  action: service name=mongod state=started enabled=yes
+
+- name: create admin user
+  mongodb_user: database=admin name={{ mongo.admin_user }} password={{ mongo.admin_password }}
+                roles='readWriteAnyDatabase,dbAdminAnyDatabase,userAdminAnyDatabase' state=present
+
+- name: create test database with user
+  mongodb_user: database={{ mongo.database }} name={{ mongo.user }} password={{ mongo.password }}
+                roles='readWrite' state=present
+                login_user={{ mongo.admin_user }} login_password={{ mongo.admin_password }}
